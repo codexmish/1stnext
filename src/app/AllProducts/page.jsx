@@ -1,23 +1,22 @@
 "use client";
-
 import { Pagination } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ProductCard from "../components/Common/ProductCard";
+import ProductCard from "../Components/common/ProductCard";
+import axios from "axios";
 
 const AllProducts = () => {
   const [allProducts, setAllProducts] = useState();
   const [limit, setLimit] = useState(12);
-  const [skip, setSkip] = useState(0)
+  const [skip, setSkip] = useState(0);
 
   console.log(allProducts);
 
   const onShowChange = (current, pageSize) => {
     setLimit(pageSize);
 
-    const skipmath = (current-1)* pageSize
+    const skipmath = (current - 1) * pageSize;
 
-    setSkip(skipmath)
+    setSkip(skipmath);
   };
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const AllProducts = () => {
               total={allProducts?.total}
               align={"end"}
               onChange={onShowChange}
-              pageSizeOptions={[12,24,40,52,100]}
+              pageSizeOptions={[12, 24, 40, 52, 100]}
             />
           </div>
         </div>
