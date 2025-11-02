@@ -28,6 +28,7 @@ const AllProducts = async () => {
                 rating={item.rating}
                 stock={item.stock}
                 discount={item.discountPercentage}
+                item={item.id}
               />
             ))}
           </div>

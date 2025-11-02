@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
@@ -12,7 +13,8 @@ const ProductCard = ({
   discount,
   rating,
   stock,
-  detailsClick
+  detailsClick,
+  item
 }) => {
   // // -----------Text Truncation PRO process
 
@@ -35,7 +37,7 @@ const ProductCard = ({
 
   return (
     <>
-      <div className="w-fit lg:w-[309px] h-[448px]">
+      <Link href={`/ProductDetails/${item}`} className="w-fit lg:w-[309px] h-[448px] block">
         <div className="w-full h-[337px] bg-gray-100 rounded-2xl overflow-hidden relative group">
           <img src={image} alt="ItemImage" />
 
@@ -78,7 +80,7 @@ const ProductCard = ({
             {rating}({stock})
           </p>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
