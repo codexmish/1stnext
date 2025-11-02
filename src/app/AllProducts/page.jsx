@@ -1,40 +1,24 @@
-"use client";
-import { Pagination } from "antd";
-import React, { useEffect, useState } from "react";
 import ProductCard from "../Components/common/ProductCard";
-import axios from "axios";
 
-const AllProducts = () => {
-  const [allProducts, setAllProducts] = useState();
-  const [limit, setLimit] = useState(12);
-  const [skip, setSkip] = useState(0);
+async function getNews() {
+  const res = await fetch('https://dummyjson.com/products', {
+    cache: 'no-store',
+  });
+  return res.json();
+}
 
-  console.log(allProducts);
+const AllProducts = async () => {
 
-  const onShowChange = (current, pageSize) => {
-    setLimit(pageSize);
+  const news = await getNews();
+  console.log(news)
 
-    const skipmath = (current - 1) * pageSize;
-
-    setSkip(skipmath);
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    axios
-      .get(
-        `https://dummyjson.com/products?limit=${limit}&skip=${skip}&select=title,price,rating,stock,category,discountPercentage,thumbnail`
-      )
-      .then((res) => setAllProducts(res.data))
-      .catch((err) => console.log(err));
-  }, [limit, skip]);
 
   return (
     <>
       <div className="allproducts">
         <div className="container">
           <div className="flex gap-5 flex-wrap mt-10">
-            {allProducts?.products.map((item, key) => (
+            {news?.products.map((item, key) => (
               <ProductCard
                 key={key}
                 title={item.title}
@@ -46,16 +30,6 @@ const AllProducts = () => {
                 discount={item.discountPercentage}
               />
             ))}
-          </div>
-
-          <div className="my-10">
-            <Pagination
-              defaultCurrent={1}
-              total={allProducts?.total}
-              align={"end"}
-              onChange={onShowChange}
-              pageSizeOptions={[12, 24, 40, 52, 100]}
-            />
           </div>
         </div>
       </div>
