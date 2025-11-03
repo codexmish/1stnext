@@ -8,7 +8,6 @@ const Limit = ({products}) => {
   const onShowChange = (current, pageSize) => {
     const skipmath = (current-1)* pageSize
     router.push(`?limit=${pageSize}&skip=${skipmath}`);
-
   };
 
   return (

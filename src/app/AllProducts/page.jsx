@@ -1,7 +1,7 @@
 import ProductCard from "../Components/common/ProductCard";
 import Limit from "../Components/Limit";
 
-async function getNews({limit, skip}) {
+async function getNews({limit = 10, skip = 10}) {
   const res = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`, {
     cache: 'no-store',
   });
@@ -14,6 +14,8 @@ const AllProducts = async ({searchParams}) => {
   const skip = query.skip;
 
   const news = await getNews({limit, skip});
+
+  console.log(news)
 
 
   return (
